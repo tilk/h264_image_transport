@@ -131,7 +131,7 @@ add_library(h264_image_transport
 ## either from message generation or dynamic reconfigure
 add_dependencies(h264_image_transport ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-target_link_libraries(h264_image_transport ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(h264_image_transport ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} x264 avcodec avutil swscale)
 
 class_loader_hide_library_symbols(h264_image_transport)
 
