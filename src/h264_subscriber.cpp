@@ -11,7 +11,7 @@ H264Subscriber::H264Subscriber(): convert_ctx(NULL)
     av_init_packet(&avpkt);
     avcodec_register_all();
     av_log_set_level(AV_LOG_FATAL);
-    codec = avcodec_find_decoder(CODEC_ID_H264);
+    codec = avcodec_find_decoder(AV_CODEC_ID_H264);
     if (!codec) {
         ROS_ERROR("cannot find H.264 codec in ffmpeg");
         throw ros::Exception("H264 codec not found, check that your ffmpeg is built with H264 support"); 
@@ -47,7 +47,7 @@ void H264Subscriber::internalCallback(const h264_image_transport::H264Packet::Co
         ROS_ERROR("Could not decode H264 frame");
         return;
     }
-    convert_ctx = sws_getCachedContext(convert_ctx, picture->width, picture->height, PIX_FMT_YUV420P, picture->width, picture->height, PIX_FMT_BGR24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+    convert_ctx = sws_getCachedContext(convert_ctx, picture->width, picture->height, AV_PIX_FMT_YUV420P, picture->width, picture->height, AV_PIX_FMT_BGR24, SWS_FAST_BILINEAR, NULL, NULL, NULL);
     sensor_msgs::ImagePtr out = boost::make_shared<sensor_msgs::Image>();
     out->data.resize(picture->width * picture->height * 3);
     int stride = 3*picture->width;
