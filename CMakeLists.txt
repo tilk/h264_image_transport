@@ -104,7 +104,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES h264_image_transport
-  CATKIN_DEPENDS message_runtime std_msgs
+  CATKIN_DEPENDS message_runtime std_msgs pluginlib
 #  DEPENDS system_lib
 )
 
